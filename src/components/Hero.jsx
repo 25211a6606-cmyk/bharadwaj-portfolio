@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Sparkles, Terminal } from 'lucide-react';
+import profileImg from '../assets/profile.jpeg';
 
 const particles = Array.from({ length: 18 }, (_, i) => ({
   id: i,
@@ -204,7 +205,7 @@ export default function Hero() {
                   {/* Photo Frame */}
                   <div className="relative w-full h-[320px] sm:h-[360px] lg:h-[390px] overflow-hidden bg-slate-100">
                     <img
-                      src="/profile.jpeg"
+                      src={profileImg}
                       alt="Ane Bharadwaj - B.Tech CSM Student at BVRIT Narsapur"
                       className="w-full h-full object-cover object-top hover:scale-[1.03] transition-transform duration-700 ease-out"
                     />

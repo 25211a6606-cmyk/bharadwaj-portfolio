@@ -45,7 +45,7 @@ export default function Resume() {
             Want to know more about my background, skills and career interests?
           </p>
           <a
-            href="/ANE_BHARADWAJ.docx"
+            href={`${import.meta.env.BASE_URL}ANE_BHARADWAJ.docx`}
             download
             className="inline-flex items-center gap-3 px-8 py-4 bg-white text-[#2563EB] font-semibold rounded-full hover:-translate-y-1 hover:shadow-lg hover:shadow-white/20 transition-all duration-300 active:scale-[0.98]"
           >
