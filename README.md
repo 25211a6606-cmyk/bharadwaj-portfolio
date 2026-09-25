@@ -2,6 +2,8 @@
 
 > Premium, responsive, modern personal portfolio website showcasing skills, projects, and career direction in Artificial Intelligence & Machine Learning.
 
+🌐 **Live Website**: **[https://25211a6606-cmyk.github.io/bharadwaj-portfolio/](https://25211a6606-cmyk.github.io/bharadwaj-portfolio/)**
+
 ## 🚀 About Bharadwaj
 Second-year B.Tech student specializing in **Artificial Intelligence & Machine Learning** at **BVRIT, Hyderabad**. Focused on Python, data analytics, machine learning algorithms, and modern AI engineering.
 
