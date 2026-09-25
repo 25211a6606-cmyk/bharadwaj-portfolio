@@ -226,6 +226,21 @@ export default function Hero() {
                   </div>
                 </div>
               </motion.div>
+
+              {/* Name under picture */}
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4, ease: smoothEase }}
+                className="mt-4 text-center"
+              >
+                <h3 className="text-xl sm:text-2xl font-extrabold tracking-wide text-[#0B1220]">
+                  ANE BHARADWAJ
+                </h3>
+                <p className="text-xs sm:text-sm font-semibold text-[#2563EB] tracking-[0.15em] uppercase mt-1">
+                  AI / ML Engineer in the Making
+                </p>
+              </motion.div>
             </div>
           </motion.div>
         </div>
