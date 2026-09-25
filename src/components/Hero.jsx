@@ -1,29 +1,29 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ChevronDown } from 'lucide-react';
+import { Sparkles, Terminal } from 'lucide-react';
 
-const particles = Array.from({ length: 20 }, (_, i) => ({
+const particles = Array.from({ length: 18 }, (_, i) => ({
   id: i,
-  size: Math.random() * 6 + 2,
-  x: Math.random() * 100,
-  y: Math.random() * 100,
-  duration: Math.random() * 8 + 6,
-  delay: Math.random() * 4,
-  opacity: Math.random() * 0.3 + 0.1,
+  size: (i % 3 === 0 ? 5 : i % 2 === 0 ? 3 : 2),
+  x: (i * 19) % 100,
+  y: (i * 23) % 100,
+  duration: 10 + (i % 5) * 2,
+  delay: (i * 0.4),
+  opacity: 0.12 + (i % 4) * 0.05,
 }));
 
 export default function Hero() {
   const ref = useRef(null);
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
-  const heroY = useTransform(scrollYProgress, [0, 1], [0, 150]);
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  const heroY = useTransform(scrollYProgress, [0, 1], [0, 100]);
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
 
   const handleMouse = (e) => {
     const { clientX, clientY } = e;
     setMouse({
-      x: (clientX / window.innerWidth - 0.5) * 30,
-      y: (clientY / window.innerHeight - 0.5) * 30,
+      x: (clientX / window.innerWidth - 0.5) * 25,
+      y: (clientY / window.innerHeight - 0.5) * 25,
     });
   };
 
@@ -31,13 +31,26 @@ export default function Hero() {
     document.querySelector(id)?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  // Silky smooth easing transitions
+  const smoothEase = [0.22, 1, 0.36, 1];
+
   const container = {
     hidden: {},
-    show: { transition: { staggerChildren: 0.12, delayChildren: 0.3 } },
+    show: {
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
+      },
+    },
   };
+
   const item = {
-    hidden: { opacity: 0, y: 30 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+    hidden: { opacity: 0, y: 25 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.7, ease: smoothEase },
+    },
   };
 
   return (
@@ -45,54 +58,50 @@ export default function Hero() {
       id="home"
       ref={ref}
       onMouseMove={handleMouse}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white"
+      className="relative min-h-screen flex items-center overflow-hidden bg-white pt-24 pb-16 lg:py-0"
     >
-      {/* Gradient Orbs */}
+      {/* Smooth Background Gradient Orbs */}
       <motion.div
-        className="absolute w-[500px] h-[500px] rounded-full opacity-[0.07] blur-[100px]"
+        className="absolute w-[560px] h-[560px] rounded-full opacity-[0.08] blur-[120px] pointer-events-none"
         style={{
           background: 'linear-gradient(135deg, #2563EB, #06B6D4)',
-          top: '10%', left: '5%',
-          x: mouse.x * 0.5, y: mouse.y * 0.5,
+          top: '5%',
+          left: '-5%',
+          x: mouse.x * 0.4,
+          y: mouse.y * 0.4,
         }}
-        animate={{ scale: [1, 1.1, 1], rotate: [0, 10, 0] }}
-        transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+        animate={{ scale: [1, 1.08, 1], rotate: [0, 8, 0] }}
+        transition={{ duration: 22, repeat: Infinity, ease: 'easeInOut' }}
       />
       <motion.div
-        className="absolute w-[400px] h-[400px] rounded-full opacity-[0.05] blur-[80px]"
+        className="absolute w-[480px] h-[480px] rounded-full opacity-[0.06] blur-[100px] pointer-events-none"
         style={{
           background: 'linear-gradient(135deg, #06B6D4, #2563EB)',
-          bottom: '10%', right: '10%',
-          x: mouse.x * -0.3, y: mouse.y * -0.3,
+          bottom: '5%',
+          right: '0%',
+          x: mouse.x * -0.3,
+          y: mouse.y * -0.3,
         }}
-        animate={{ scale: [1, 1.15, 1], rotate: [0, -15, 0] }}
-        transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
-      />
-      <motion.div
-        className="absolute w-[300px] h-[300px] rounded-full opacity-[0.04] blur-[60px]"
-        style={{
-          background: 'linear-gradient(135deg, #2563EB, #06B6D4)',
-          top: '50%', right: '30%',
-          x: mouse.x * 0.2, y: mouse.y * 0.2,
-        }}
-        animate={{ scale: [1, 1.2, 1] }}
-        transition={{ duration: 18, repeat: Infinity, ease: 'linear' }}
+        animate={{ scale: [1, 1.12, 1], rotate: [0, -12, 0] }}
+        transition={{ duration: 26, repeat: Infinity, ease: 'easeInOut' }}
       />
 
-      {/* Particles */}
-      {particles.map(p => (
+      {/* Floating Antigravity Particles */}
+      {particles.map((p) => (
         <motion.div
           key={p.id}
-          className="absolute rounded-full bg-[#2563EB]"
+          className="absolute rounded-full bg-[#2563EB] pointer-events-none"
           style={{
-            width: p.size, height: p.size,
-            left: `${p.x}%`, top: `${p.y}%`,
+            width: p.size,
+            height: p.size,
+            left: `${p.x}%`,
+            top: `${p.y}%`,
             opacity: p.opacity,
-            filter: p.size > 5 ? 'blur(1px)' : 'none',
+            filter: p.size > 4 ? 'blur(0.8px)' : 'none',
           }}
           animate={{
-            y: [0, -30, 0, 20, 0],
-            x: [0, 10, -10, 5, 0],
+            y: [0, -35, 0, 25, 0],
+            x: [0, 12, -12, 6, 0],
           }}
           transition={{
             duration: p.duration,
@@ -103,99 +112,123 @@ export default function Hero() {
         />
       ))}
 
-      {/* Content */}
+      {/* 2-Column Hero Content: Text Left, Big Rectangular Image Right (50% Hero) */}
       <motion.div
         style={{ y: heroY, opacity: heroOpacity }}
-        className="relative z-10 max-w-4xl mx-auto px-6 text-center"
+        className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full"
       >
-        <motion.div variants={container} initial="hidden" animate="show">
-          {/* Profile Picture */}
-          <motion.div variants={item} className="flex justify-center mb-8">
-            <div className="relative group">
-              {/* Outer soft ambient glow */}
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-                className="absolute -inset-1.5 rounded-full bg-gradient-to-r from-[#2563EB] via-[#06B6D4] to-[#2563EB] opacity-60 blur-md group-hover:opacity-90 transition duration-500"
-              />
-              <motion.div
-                animate={{ y: [0, -6, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 rounded-full p-[4px] bg-gradient-to-tr from-[#2563EB] to-[#06B6D4] shadow-2xl shadow-blue-500/25"
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          {/* Left Column: Text & CTAs (approx. 55% width on desktop) */}
+          <motion.div
+            variants={container}
+            initial="hidden"
+            animate="show"
+            className="lg:col-span-7 text-left order-2 lg:order-1"
+          >
+            <motion.div variants={item} className="mb-5">
+              <span className="inline-flex items-center gap-2 px-4 py-1.5 text-xs font-semibold tracking-[0.2em] text-[#2563EB] border-l-2 border-[#2563EB] bg-blue-50/80 rounded-r-full shadow-sm shadow-blue-500/5">
+                <Sparkles size={13} className="text-[#2563EB]" />
+                AI / ML STUDENT
+              </span>
+            </motion.div>
+
+            <motion.h1
+              variants={item}
+              className="text-4xl sm:text-5xl md:text-6xl font-bold text-[#0B1220] leading-[1.12] mb-6 tracking-tight"
+            >
+              Building{' '}
+              <span className="bg-gradient-to-r from-[#2563EB] via-[#1d4ed8] to-[#06B6D4] bg-clip-text text-transparent">
+                Intelligent Solutions
+              </span>
+              <br />
+              for the Future.
+            </motion.h1>
+
+            <motion.p
+              variants={item}
+              className="text-base sm:text-lg text-[#64748B] mb-4 leading-relaxed font-normal"
+            >
+              Second-year AI/ML student passionate about Python, data, machine learning, and building intelligent solutions.
+            </motion.p>
+
+            <motion.p
+              variants={item}
+              className="text-sm sm:text-base text-[#64748B]/85 mb-8 leading-relaxed font-normal"
+            >
+              I’m Bharadwaj, a second-year B.Tech student specializing in Artificial Intelligence &amp; Machine Learning at BVRIT, Hyderabad. I’m focused on strengthening my programming, data analytics, machine learning, and software development skills while exploring modern AI technologies.
+            </motion.p>
+
+            <motion.div
+              variants={item}
+              className="flex flex-wrap items-center gap-4"
+            >
+              <button
+                onClick={() => scrollTo('#skills')}
+                className="px-8 py-3.5 bg-[#2563EB] text-white text-sm font-semibold rounded-full hover:bg-[#1d4ed8] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-500/25 active:scale-[0.98]"
               >
-                <div className="w-full h-full rounded-full overflow-hidden bg-white ring-4 ring-white">
+                Explore My Skills
+              </button>
+              <button
+                onClick={() => scrollTo('#contact')}
+                className="px-8 py-3.5 border-2 border-[#0B1220]/15 text-[#0B1220] text-sm font-semibold rounded-full hover:border-[#2563EB] hover:text-[#2563EB] transition-all duration-300 hover:-translate-y-0.5 active:scale-[0.98]"
+              >
+                Let's Connect
+              </button>
+            </motion.div>
+          </motion.div>
+
+          {/* Right Column: Rectangular Image covering half of home (approx. 45-50% width) */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.94, y: 30 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 0.9, ease: smoothEase, delay: 0.2 }}
+            className="lg:col-span-5 flex justify-center lg:justify-end order-1 lg:order-2"
+          >
+            <div className="relative w-full max-w-[420px] sm:max-w-[460px] lg:max-w-none">
+              {/* Ambient Glow behind the rectangular card */}
+              <div
+                className="absolute -inset-2 rounded-3xl bg-gradient-to-tr from-[#2563EB]/25 via-[#06B6D4]/20 to-transparent blur-2xl opacity-70"
+                aria-hidden="true"
+              />
+
+              {/* Smooth Antigravity Floating Container */}
+              <motion.div
+                animate={{ y: [0, -10, 0] }}
+                transition={{
+                  duration: 6,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                }}
+                className="relative rounded-3xl p-[3px] bg-gradient-to-b from-blue-200 via-blue-100 to-cyan-100 shadow-2xl shadow-blue-500/15"
+              >
+                {/* Rectangular Image Frame */}
+                <div className="relative w-full aspect-[4/5] sm:aspect-[4/5] rounded-[22px] overflow-hidden bg-white">
                   <img
                     src="/profile.jpeg"
-                    alt="Bharadwaj - AI/ML Student"
-                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                    alt="Bharadwaj - AI/ML Student at BVRIT"
+                    className="w-full h-full object-cover object-top hover:scale-[1.02] transition-transform duration-700 ease-out"
                   />
-                </div>
 
-                {/* Status indicator dot */}
-                <div className="absolute bottom-2 right-2 flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white shadow-md border border-slate-100">
-                  <span className="w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full bg-emerald-500 animate-pulse" title="Active & Open to Opportunities" />
+                  {/* Subtle gradient overlay at bottom for depth */}
+                  <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#0B1220]/60 via-[#0B1220]/20 to-transparent pointer-events-none" />
+
+                  {/* Bottom Floating Badge inside image frame */}
+                  <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-white/95">
+                    <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/15 backdrop-blur-md border border-white/20">
+                      <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
+                      <span className="text-xs font-semibold tracking-wide">AI/ML • BVRIT</span>
+                    </div>
+
+                    <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/15 backdrop-blur-md border border-white/20 text-xs font-medium">
+                      <Terminal size={13} className="text-[#06B6D4]" />
+                      <span>Python &amp; Data</span>
+                    </div>
+                  </div>
                 </div>
               </motion.div>
             </div>
           </motion.div>
-
-          <motion.div variants={item} className="mb-6">
-            <span className="inline-block px-4 py-1.5 text-xs font-semibold tracking-[0.2em] text-[#2563EB] border-l-2 border-[#2563EB] bg-blue-50 rounded-r-full">
-              AI / ML STUDENT
-            </span>
-          </motion.div>
-
-          <motion.h1
-            variants={item}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-[#0B1220] leading-[1.1] mb-6"
-          >
-            Building{' '}
-            <span className="bg-gradient-to-r from-[#2563EB] to-[#06B6D4] bg-clip-text text-transparent">
-              Intelligent Solutions
-            </span>
-            <br />
-            for the Future.
-          </motion.h1>
-
-          <motion.p variants={item} className="text-base md:text-lg text-[#64748B] max-w-2xl mx-auto mb-4 leading-relaxed">
-            Second-year AI/ML student passionate about Python, data, machine learning, and building intelligent solutions.
-          </motion.p>
-
-          <motion.p variants={item} className="text-sm md:text-base text-[#64748B]/80 max-w-2xl mx-auto mb-10 leading-relaxed">
-            I'm Bharadwaj, a second-year B.Tech student specializing in Artificial Intelligence &amp; Machine Learning at BVRIT, Hyderabad. I'm focused on strengthening my programming, data analytics, machine learning, and software development skills while exploring modern AI technologies.
-          </motion.p>
-
-          <motion.div variants={item} className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-2">
-            <button
-              onClick={() => scrollTo('#skills')}
-              className="group px-8 py-3.5 bg-[#2563EB] text-white text-sm font-semibold rounded-full hover:bg-[#1d4ed8] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-500/25 active:scale-[0.98]"
-            >
-              Explore My Skills
-            </button>
-            <button
-              onClick={() => scrollTo('#contact')}
-              className="group px-8 py-3.5 border-2 border-[#0B1220]/10 text-[#0B1220] text-sm font-semibold rounded-full hover:border-[#2563EB] hover:text-[#2563EB] transition-all duration-300 hover:-translate-y-0.5 active:scale-[0.98]"
-            >
-              Let's Connect
-            </button>
-          </motion.div>
-        </motion.div>
-      </motion.div>
-
-      {/* Scroll Indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10"
-      >
-        <span className="text-[10px] font-semibold tracking-[0.2em] text-[#64748B]/60">SCROLL TO EXPLORE</span>
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-        >
-          <ChevronDown size={18} className="text-[#2563EB]/50" />
-        </motion.div>
+        </div>
       </motion.div>
     </section>
   );
