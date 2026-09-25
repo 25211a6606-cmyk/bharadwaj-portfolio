@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ChevronDown, Download } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 
 const particles = Array.from({ length: 20 }, (_, i) => ({
   id: i,
@@ -109,6 +109,36 @@ export default function Hero() {
         className="relative z-10 max-w-4xl mx-auto px-6 text-center"
       >
         <motion.div variants={container} initial="hidden" animate="show">
+          {/* Profile Picture */}
+          <motion.div variants={item} className="flex justify-center mb-6">
+            <div className="relative group">
+              {/* Outer soft ambient glow */}
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+                className="absolute -inset-1 rounded-full bg-gradient-to-r from-[#2563EB] via-[#06B6D4] to-[#2563EB] opacity-60 blur-md group-hover:opacity-90 transition duration-500"
+              />
+              <motion.div
+                animate={{ y: [0, -6, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+                className="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 rounded-full p-[3px] bg-gradient-to-tr from-[#2563EB] to-[#06B6D4] shadow-xl shadow-blue-500/20"
+              >
+                <div className="w-full h-full rounded-full overflow-hidden bg-white ring-4 ring-white">
+                  <img
+                    src="/profile.jpeg"
+                    alt="Bharadwaj - AI/ML Student"
+                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+
+                {/* Status indicator dot */}
+                <div className="absolute bottom-1 right-1 flex items-center justify-center w-6 h-6 rounded-full bg-white shadow-md">
+                  <span className="w-3 h-3 rounded-full bg-emerald-500 animate-pulse" title="Active & Open to Opportunities" />
+                </div>
+              </motion.div>
+            </div>
+          </motion.div>
+
           <motion.div variants={item} className="mb-6">
             <span className="inline-block px-4 py-1.5 text-xs font-semibold tracking-[0.2em] text-[#2563EB] border-l-2 border-[#2563EB] bg-blue-50 rounded-r-full">
               AI / ML STUDENT
@@ -135,7 +165,7 @@ export default function Hero() {
             I'm Bharadwaj, a second-year B.Tech student specializing in Artificial Intelligence &amp; Machine Learning at BVRIT, Hyderabad. I'm focused on strengthening my programming, data analytics, machine learning, and software development skills while exploring modern AI technologies.
           </motion.p>
 
-          <motion.div variants={item} className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
+          <motion.div variants={item} className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-2">
             <button
               onClick={() => scrollTo('#skills')}
               className="group px-8 py-3.5 bg-[#2563EB] text-white text-sm font-semibold rounded-full hover:bg-[#1d4ed8] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-500/25 active:scale-[0.98]"
@@ -148,16 +178,6 @@ export default function Hero() {
             >
               Let's Connect
             </button>
-          </motion.div>
-
-          <motion.div variants={item}>
-            <a
-              href="/ANE_BHARADWAJ.docx"
-              download
-              className="inline-flex items-center gap-2 text-sm text-[#64748B] hover:text-[#2563EB] transition-colors"
-            >
-              <Download size={14} /> Download Resume
-            </a>
           </motion.div>
         </motion.div>
       </motion.div>

@@ -1,57 +1,67 @@
-import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
 
 export default function CustomCursor() {
-  const [pos, setPos] = useState({ x: 0, y: 0 });
+  const cursorRef = useRef(null);
   const [hovering, setHovering] = useState(false);
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    // Only on desktop
-    if ('ontouchstart' in window) return;
+    // Only enable on desktop/pointer devices
+    if (typeof window === 'undefined' || window.matchMedia('(pointer: coarse)').matches) {
+      return;
+    }
 
-    const move = (e) => {
-      setPos({ x: e.clientX, y: e.clientY });
-      setVisible(true);
+    const cursor = cursorRef.current;
+    if (!cursor) return;
+
+    const handleMouseMove = (e) => {
+      cursor.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
+      if (!visible) setVisible(true);
     };
-    const enter = () => setHovering(true);
-    const leave = () => setHovering(false);
 
-    window.addEventListener('mousemove', move);
+    const handleMouseEnter = () => setHovering(true);
+    const handleMouseLeave = () => setHovering(false);
 
-    const addListeners = () => {
-      document.querySelectorAll('a, button, [data-hover]').forEach(el => {
-        el.addEventListener('mouseenter', enter);
-        el.addEventListener('mouseleave', leave);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+
+    const attachListeners = () => {
+      document.querySelectorAll('a, button, input, textarea, [role="button"], [data-hover]').forEach((el) => {
+        el.removeEventListener('mouseenter', handleMouseEnter);
+        el.removeEventListener('mouseleave', handleMouseLeave);
+        el.addEventListener('mouseenter', handleMouseEnter);
+        el.addEventListener('mouseleave', handleMouseLeave);
       });
     };
 
-    addListeners();
-    const observer = new MutationObserver(addListeners);
+    attachListeners();
+    const observer = new MutationObserver(attachListeners);
     observer.observe(document.body, { childList: true, subtree: true });
 
     return () => {
-      window.removeEventListener('mousemove', move);
+      window.removeEventListener('mousemove', handleMouseMove);
       observer.disconnect();
     };
-  }, []);
+  }, [visible]);
 
   if (!visible) return null;
 
   return (
-    <motion.div
-      className="fixed top-0 left-0 pointer-events-none z-[9999] mix-blend-difference"
-      animate={{
-        x: pos.x - (hovering ? 20 : 10),
-        y: pos.y - (hovering ? 20 : 10),
-        width: hovering ? 40 : 20,
-        height: hovering ? 40 : 20,
+    <div
+      ref={cursorRef}
+      className="fixed top-0 left-0 pointer-events-none z-[9999] will-change-transform"
+      style={{
+        transform: 'translate3d(-100px, -100px, 0)',
+        transition: 'opacity 0.15s ease',
       }}
-      transition={{ type: 'spring', stiffness: 500, damping: 28 }}
     >
-      <div className={`w-full h-full rounded-full border-2 border-[#2563EB] transition-all duration-200 ${
-        hovering ? 'bg-[#2563EB]/10' : 'bg-transparent'
-      }`} />
-    </motion.div>
+      {/* Outer interactive ring - centered exactly on pointer with zero movement lag */}
+      <div
+        className={`rounded-full border-2 border-[#2563EB] -translate-x-1/2 -translate-y-1/2 transition-all duration-150 ease-out ${
+          hovering
+            ? 'w-10 h-10 bg-[#2563EB]/15 scale-125 border-[#06B6D4] shadow-md shadow-blue-500/30'
+            : 'w-5 h-5 bg-transparent opacity-80'
+        }`}
+      />
+    </div>
   );
 }
