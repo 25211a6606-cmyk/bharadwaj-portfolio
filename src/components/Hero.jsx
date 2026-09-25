@@ -58,7 +58,7 @@ export default function Hero() {
       id="home"
       ref={ref}
       onMouseMove={handleMouse}
-      className="relative min-h-screen flex items-center overflow-hidden bg-white pt-24 pb-16 lg:py-0"
+      className="relative min-h-screen flex items-center overflow-x-hidden bg-white py-20 lg:py-0"
     >
       {/* Smooth Background Gradient Orbs */}
       <motion.div
@@ -177,69 +177,62 @@ export default function Hero() {
             </motion.div>
           </motion.div>
 
-          {/* Right Column: Rectangular Image covering half of home (approx. 45-50% width) */}
+          {/* Right Column: Rectangular Image with Nameplate covering half of home */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.94, y: 30 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: smoothEase, delay: 0.2 }}
+            initial={{ opacity: 1, scale: 1, y: 0 }}
             className="lg:col-span-5 flex justify-center lg:justify-end order-1 lg:order-2"
           >
-            <div className="relative w-full max-w-[420px] sm:max-w-[460px] lg:max-w-none">
+            <div className="relative w-full max-w-[400px] sm:max-w-[440px] lg:max-w-[460px]">
               {/* Ambient Glow behind the rectangular card */}
               <div
-                className="absolute -inset-2 rounded-3xl bg-gradient-to-tr from-[#2563EB]/25 via-[#06B6D4]/20 to-transparent blur-2xl opacity-70"
+                className="absolute -inset-2 rounded-3xl bg-gradient-to-tr from-[#2563EB]/25 via-[#06B6D4]/20 to-transparent blur-2xl opacity-75"
                 aria-hidden="true"
               />
 
               {/* Smooth Antigravity Floating Container */}
               <motion.div
-                animate={{ y: [0, -10, 0] }}
+                animate={{ y: [0, -8, 0] }}
                 transition={{
-                  duration: 6,
+                  duration: 5,
                   repeat: Infinity,
                   ease: 'easeInOut',
                 }}
-                className="relative rounded-3xl p-[3px] bg-gradient-to-b from-blue-200 via-blue-100 to-cyan-100 shadow-2xl shadow-blue-500/15"
+                className="relative rounded-3xl p-[3px] bg-gradient-to-b from-blue-300 via-blue-100 to-cyan-200 shadow-2xl shadow-blue-500/20"
               >
-                {/* Rectangular Image Frame */}
-                <div className="relative w-full aspect-[4/5] sm:aspect-[4/5] rounded-[22px] overflow-hidden bg-white">
-                  <img
-                    src="/profile.jpeg"
-                    alt="Bharadwaj - AI/ML Student at BVRIT"
-                    className="w-full h-full object-cover object-top hover:scale-[1.02] transition-transform duration-700 ease-out"
-                  />
+                {/* Rectangular Image + Name Showcase Card */}
+                <div className="relative w-full rounded-[22px] overflow-hidden bg-white">
+                  {/* Photo Frame */}
+                  <div className="relative w-full h-[320px] sm:h-[360px] lg:h-[390px] overflow-hidden bg-slate-100">
+                    <img
+                      src="/profile.jpeg"
+                      alt="Ane Bharadwaj - AI/ML Student at BVRIT"
+                      className="w-full h-full object-cover object-top hover:scale-[1.03] transition-transform duration-700 ease-out"
+                    />
 
-                  {/* Subtle gradient overlay at bottom for depth */}
-                  <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#0B1220]/60 via-[#0B1220]/20 to-transparent pointer-events-none" />
-
-                  {/* Bottom Floating Badge inside image frame */}
-                  <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-white/95">
-                    <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/15 backdrop-blur-md border border-white/20">
-                      <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
-                      <span className="text-xs font-semibold tracking-wide">AI/ML • BVRIT</span>
-                    </div>
-
-                    <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/15 backdrop-blur-md border border-white/20 text-xs font-medium">
-                      <Terminal size={13} className="text-[#06B6D4]" />
-                      <span>Python &amp; Data</span>
+                    {/* Top status badge */}
+                    <div className="absolute top-3 right-3 flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/85 backdrop-blur-md border border-white/50 shadow-sm text-xs font-semibold text-[#0B1220]">
+                      <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                      <span>AI/ML</span>
                     </div>
                   </div>
-                </div>
-              </motion.div>
 
-              {/* Name under picture */}
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.4, ease: smoothEase }}
-                className="mt-4 text-center"
-              >
-                <h3 className="text-xl sm:text-2xl font-extrabold tracking-wide text-[#0B1220]">
-                  ANE BHARADWAJ
-                </h3>
-                <p className="text-xs sm:text-sm font-semibold text-[#2563EB] tracking-[0.15em] uppercase mt-1">
-                  AI / ML Engineer in the Making
-                </p>
+                  {/* Nameplate Directly Under The Picture */}
+                  <div className="p-5 bg-gradient-to-b from-white via-white to-blue-50/40 border-t border-blue-100 text-center">
+                    <h2 className="text-2xl sm:text-3xl font-black tracking-wider text-[#0B1220] uppercase">
+                      ANE BHARADWAJ
+                    </h2>
+                    <div className="flex items-center justify-center gap-2 mt-1.5">
+                      <span className="h-0.5 w-5 bg-[#2563EB]/30 rounded-full" />
+                      <p className="text-xs sm:text-sm font-bold text-[#2563EB] tracking-[0.16em] uppercase">
+                        AI / ML Engineer in the Making
+                      </p>
+                      <span className="h-0.5 w-5 bg-[#2563EB]/30 rounded-full" />
+                    </div>
+                    <p className="text-xs text-[#64748B] mt-1.5 font-medium">
+                      B.Tech AI &amp; ML • BVRIT Hyderabad
+                    </p>
+                  </div>
+                </div>
               </motion.div>
             </div>
           </motion.div>
