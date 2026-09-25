@@ -8,7 +8,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-12">
         <div className="flex flex-col md:flex-row items-center justify-between gap-8 mb-8">
           <div>
-            <div className="text-lg font-bold tracking-wide">BHARADWAJ</div>
+            <div className="text-lg font-bold tracking-wide">ANE BHARADWAJ</div>
             <div className="text-sm text-white/50 mt-1">AI/ML Engineer in the Making</div>
           </div>
 
@@ -34,7 +34,7 @@ export default function Footer() {
 
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-white/40">
-            © 2026 Bharadwaj. All rights reserved.
+            © 2026 Ane Bharadwaj. All rights reserved.
           </p>
           <button
             onClick={scrollToTop}

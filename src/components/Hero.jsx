@@ -155,7 +155,7 @@ export default function Hero() {
               variants={item}
               className="text-sm sm:text-base text-[#64748B]/85 mb-8 leading-relaxed font-normal"
             >
-              I’m Bharadwaj, a second-year B.Tech student specializing in Artificial Intelligence &amp; Machine Learning at BVRIT, Hyderabad. I’m focused on strengthening my programming, data analytics, machine learning, and software development skills while exploring modern AI technologies.
+              I’m Ane Bharadwaj, a second-year B.Tech CSM student specializing in Artificial Intelligence &amp; Machine Learning at BVRIT Narsapur. I’m focused on strengthening my programming, data analytics, machine learning, and software development skills while exploring modern AI technologies.
             </motion.p>
 
             <motion.div
@@ -205,14 +205,14 @@ export default function Hero() {
                   <div className="relative w-full h-[320px] sm:h-[360px] lg:h-[390px] overflow-hidden bg-slate-100">
                     <img
                       src="/profile.jpeg"
-                      alt="Ane Bharadwaj - AI/ML Student at BVRIT"
+                      alt="Ane Bharadwaj - B.Tech CSM Student at BVRIT Narsapur"
                       className="w-full h-full object-cover object-top hover:scale-[1.03] transition-transform duration-700 ease-out"
                     />
 
                     {/* Top status badge */}
                     <div className="absolute top-3 right-3 flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/85 backdrop-blur-md border border-white/50 shadow-sm text-xs font-semibold text-[#0B1220]">
                       <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                      <span>AI/ML</span>
+                      <span>CSM (AI/ML)</span>
                     </div>
                   </div>
 
@@ -229,7 +229,7 @@ export default function Hero() {
                       <span className="h-0.5 w-5 bg-[#2563EB]/30 rounded-full" />
                     </div>
                     <p className="text-xs text-[#64748B] mt-1.5 font-medium">
-                      B.Tech AI &amp; ML • BVRIT Hyderabad
+                      B.Tech CSM • BVRIT Narsapur
                     </p>
                   </div>
                 </div>

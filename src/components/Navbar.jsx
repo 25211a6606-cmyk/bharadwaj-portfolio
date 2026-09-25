@@ -59,7 +59,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
           <button onClick={() => scrollTo('#home')} className="text-lg font-bold text-[#0B1220] tracking-wide">
-            BHARADWAJ
+            ANE BHARADWAJ
           </button>
 
           {/* Desktop */}

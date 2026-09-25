@@ -4,7 +4,7 @@ import { Github, Linkedin, Mail, Phone } from 'lucide-react';
 
 const stats = [
   { value: '02', label: 'Year of B.Tech' },
-  { value: 'AI/ML', label: 'Specialization' },
+  { value: 'CSM', label: 'Branch (AI & ML)' },
   { value: 'Python', label: 'Primary Language' },
   { value: 'AI/ML', label: 'Career Focus' },
 ];
@@ -51,7 +51,7 @@ export default function About() {
             className="lg:col-span-3 space-y-6"
           >
             <p className="text-[#64748B] leading-relaxed">
-              I'm a second-year B.Tech student specializing in Artificial Intelligence &amp; Machine Learning at BVRIT, Hyderabad, with a strong interest in Python programming, data analytics, machine learning, and emerging AI technologies.
+              I'm a second-year B.Tech CSM student specializing in Artificial Intelligence &amp; Machine Learning at BVRIT Narsapur, with a strong interest in Python programming, data analytics, machine learning, and emerging AI technologies.
             </p>
             <p className="text-[#64748B] leading-relaxed">
               I'm continuously strengthening my technical foundation through hands-on learning, practical exercises, and exploring real-world applications of AI and ML. I enjoy understanding how data can be transformed into meaningful insights and how intelligent systems can be developed to solve practical problems.
