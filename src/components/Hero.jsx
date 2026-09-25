@@ -110,18 +110,18 @@ export default function Hero() {
       >
         <motion.div variants={container} initial="hidden" animate="show">
           {/* Profile Picture */}
-          <motion.div variants={item} className="flex justify-center mb-6">
+          <motion.div variants={item} className="flex justify-center mb-8">
             <div className="relative group">
               {/* Outer soft ambient glow */}
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-                className="absolute -inset-1 rounded-full bg-gradient-to-r from-[#2563EB] via-[#06B6D4] to-[#2563EB] opacity-60 blur-md group-hover:opacity-90 transition duration-500"
+                className="absolute -inset-1.5 rounded-full bg-gradient-to-r from-[#2563EB] via-[#06B6D4] to-[#2563EB] opacity-60 blur-md group-hover:opacity-90 transition duration-500"
               />
               <motion.div
                 animate={{ y: [0, -6, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                className="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 rounded-full p-[3px] bg-gradient-to-tr from-[#2563EB] to-[#06B6D4] shadow-xl shadow-blue-500/20"
+                className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 rounded-full p-[4px] bg-gradient-to-tr from-[#2563EB] to-[#06B6D4] shadow-2xl shadow-blue-500/25"
               >
                 <div className="w-full h-full rounded-full overflow-hidden bg-white ring-4 ring-white">
                   <img
@@ -132,8 +132,8 @@ export default function Hero() {
                 </div>
 
                 {/* Status indicator dot */}
-                <div className="absolute bottom-1 right-1 flex items-center justify-center w-6 h-6 rounded-full bg-white shadow-md">
-                  <span className="w-3 h-3 rounded-full bg-emerald-500 animate-pulse" title="Active & Open to Opportunities" />
+                <div className="absolute bottom-2 right-2 flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white shadow-md border border-slate-100">
+                  <span className="w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full bg-emerald-500 animate-pulse" title="Active & Open to Opportunities" />
                 </div>
               </motion.div>
             </div>
