@@ -224,12 +224,12 @@ export default function Hero() {
                     <div className="flex items-center justify-center gap-2 mt-1.5">
                       <span className="h-0.5 w-5 bg-[#2563EB]/30 rounded-full" />
                       <p className="text-xs sm:text-sm font-bold text-[#2563EB] tracking-[0.16em] uppercase">
-                        AI / ML Engineer in the Making
+                        BVRIT Narsapur
                       </p>
                       <span className="h-0.5 w-5 bg-[#2563EB]/30 rounded-full" />
                     </div>
                     <p className="text-xs text-[#64748B] mt-1.5 font-medium">
-                      B.Tech CSM • BVRIT Narsapur
+                      B.Tech CSM • AI &amp; ML Engineer in the Making
                     </p>
                   </div>
                 </div>
